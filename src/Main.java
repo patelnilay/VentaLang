@@ -3,6 +3,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+import Lexer.Lexer;
+
 public class Main {
     public static void main(String[] args) {
         String line = "";
@@ -21,5 +23,8 @@ public class Main {
         } catch (IOException e) {
             System.out.println("Unable to read the file.");
         }
+
+        Lexer fileLexer = new Lexer();
+        fileLexer.tokenise();
     }
 }

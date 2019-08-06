@@ -1,14 +1,21 @@
 package Lexer;
 
-public class Lexer {
-    public static void main(String[] args) {
-        String sourceCode = "";
 
-    }
+import java.util.ArrayList;
 
-    public String tokenise(){
-        System.out.println("YAhooo");
-        return null;
+public class Lexer{
+
+    public ArrayList tokenise(String sourceCode){
+        ArrayList tokens = new ArrayList();
+        String[] SplitSourceCode;
+        SplitSourceCode = sourceCode.split(" ");
+        int sourceIndex = 0;
+
+        while (sourceIndex < SplitSourceCode.length){
+            System.out.println(SplitSourceCode[sourceIndex]);
+            sourceIndex ++;
+        }
+        return tokens;
     }
 
 }

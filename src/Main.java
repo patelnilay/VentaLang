@@ -1,30 +1,27 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 import Lexer.Lexer;
 
 public class Main {
     public static void main(String[] args) {
-        String line = "";
-        String data = "";
+        String content;
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader("src/test.venta"));
-            while (line != null) {
-                data += line;
-                line = bufferedReader.readLine();
+            FileReader fileReader = new FileReader("src/test.venta");
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                //process the line
+                content = line;
 
+                Lexer fileLexer = new Lexer();
+                fileLexer.tokenise(content);
             }
-            System.out.println(data);
-            bufferedReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         } catch (IOException e) {
             System.out.println("Unable to read the file.");
         }
 
-        Lexer fileLexer = new Lexer();
-        fileLexer.tokenise();
+
     }
 }

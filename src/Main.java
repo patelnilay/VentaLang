@@ -3,10 +3,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import Lexer.Lexer;
-import Parser.Parser;
 
 public class Main {
-    static List<List<String>> tokens;
     public static void main(String[] args) {
         String content;
         try {
@@ -18,12 +16,8 @@ public class Main {
                 content = line;
 
                 Lexer fileLexer = new Lexer();
-                tokens = fileLexer.tokenise(content);
+                List<List<String>> tokens = fileLexer.tokenise(content);
             }
-
-            Parser fileparser = new Parser();
-            fileparser.parse(tokens);
-
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         } catch (IOException e) {

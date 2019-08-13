@@ -1,4 +1,6 @@
 import java.io.*;
+import java.util.Arrays;
+import java.util.List;
 
 import Lexer.Lexer;
 
@@ -14,7 +16,7 @@ public class Main {
                 content = line;
 
                 Lexer fileLexer = new Lexer();
-                fileLexer.tokenise(content);
+                var lexedFile = fileLexer.tokenise(content);
             }
         } catch (FileNotFoundException e) {
             System.out.println("File not found");

@@ -1,13 +1,16 @@
 package Lexer;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class Lexer {
+    private static List<String[]> tokens = new ArrayList<>();
 
-    public HashMap tokenise(String sourceCode) {
-        HashMap<String, String> tokens = new HashMap<>();
+    public List tokenise(String sourceCode) {
+        String[] addToTokens;
         String[] SplitSourceCode;
         SplitSourceCode = sourceCode.split(" ");
         String[] operatorsArray = {"=", "/", "*", "=", "-", "+"};
@@ -21,29 +24,37 @@ public class Lexer {
 
             // checks is currentWord is "var" and create a "VAR DECLARATION" token for it
             if (currentWord.equals("var")) {
-                tokens.put("VAR DECLARATION", currentWord);
+                addToTokens = new String[]{"VAR DECLARATION", currentWord};
+                tokens.add(addToTokens);
                 // Using regex, this will recognise a word and create an IDENTIFIER token for it.
             } else if (currentWord.matches("[a-zA-Z]+")) {
-                tokens.put("IDENTIFIER", currentWord);
+                addToTokens = new String[]{"IDENTIFIER", currentWord};
+                tokens.add(addToTokens);
             } else if (currentWord.matches("[0-9]+")) {
-                tokens.put("INTEGER", currentWord);
+                addToTokens = new String[]{"INTEGER", currentWord};
+                tokens.add(addToTokens);
             } else if (Arrays.asList(operatorsArray).contains(currentWord)) {
-                tokens.put("OPERATOR", currentWord);
+                addToTokens = new String[]{"OPERATOR", currentWord};
+                tokens.add(addToTokens);
                 // This will recognise an a semicolon [;] and create an SYMBOL token for it.
             } else if (currentWord.contains(";")) {
-                tokens.put("SYMBOL", lastChar);
                 if (currentWordWithoutSemiColon.matches("[a-zA-Z]+")) {
-                    tokens.put("IDENTIFIER", currentWordWithoutSemiColon);
+                    addToTokens = new String[]{"IDENTIFIER", currentWordWithoutSemiColon};
+                    tokens.add(addToTokens);
+                    addToTokens = new String[]{"SYMBOL", lastChar};
+                    tokens.add(addToTokens);
                     // Using regex, this will recognise an integer and create a INTEGER token for it.
                 }
                 if (currentWordWithoutSemiColon.matches("[0-9]+")) {
-                    tokens.put("INTEGER", currentWordWithoutSemiColon);
+                    addToTokens = new String[]{"INTEGER", currentWordWithoutSemiColon};
+                    tokens.add(addToTokens);
+                    addToTokens = new String[]{"SYMBOL", lastChar};
+                    tokens.add(addToTokens);
                     // This will recognise an operator and create a OPERATOR token for it.
                 }
             }
             sourceIndex++;
         } // end for loop
-        System.out.println(tokens.values());
         return tokens;
     }
 }

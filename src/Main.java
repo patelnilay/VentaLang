@@ -16,7 +16,7 @@ public class Main {
                 content = line;
 
                 Lexer fileLexer = new Lexer();
-                var lexedFile = fileLexer.tokenise(content);
+                List<List<String>> tokens = fileLexer.tokenise(content);
             }
         } catch (FileNotFoundException e) {
             System.out.println("File not found");

@@ -8,6 +8,8 @@ import Parser.Parser;
 public class Main {
     private static List<List<String>> tokens;
     public static void main(String[] args) {
+        Lexer fileLexer = new Lexer();
+        Parser fileParser = new Parser();
         String content;
         try {
             FileReader fileReader = new FileReader("src/test.venta");
@@ -17,11 +19,9 @@ public class Main {
                 //process the line
                 content = line;
 
-                Lexer fileLexer = new Lexer();
                 tokens = fileLexer.tokenise(content);
             }
 
-            Parser fileParser = new Parser();
             fileParser.parse(tokens);
 
         } catch (FileNotFoundException e) {

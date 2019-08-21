@@ -2,7 +2,6 @@ package Lexer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -13,7 +12,7 @@ public class Lexer {
         String[] addToTokens;
         String[] SplitSourceCode;
         SplitSourceCode = sourceCode.split(" ");
-        String[] operatorsArray = {"=", "/", "*", "=", "-", "+"};
+        String[] operatorsArray = {"=", "/", "*", "%", "-", "+"};
         int sourceIndex = 0;
 
 
@@ -24,7 +23,7 @@ public class Lexer {
 
             // checks is currentWord is "var" and create a "VAR DECLARATION" token for it
             if (currentWord.equals("var")) {
-                addToTokens = new String[]{"VAR DECLARATION", currentWord};
+                addToTokens = new String[]{"VAR_DECLARATION", currentWord};
                 tokens.add(Arrays.asList(addToTokens));
                 // Using regex, this will recognise a word and create an IDENTIFIER token for it.
             } else if (currentWord.matches("[a-zA-Z]+")) {

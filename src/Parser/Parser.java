@@ -2,9 +2,11 @@ package Parser;
 
 import java.util.Arrays;
 import java.util.List;
+import Objects.*;
 
 public class Parser {
     int tokenIndex = 0;
+    String transpiledCode;
 
     public String parse(List<List<String>> tokens) {
 
@@ -28,8 +30,12 @@ public class Parser {
     private void parseVarDeclarations(List<List<String>> tokenStream) {
 
         String[] tokenTypesList = {"INTEGER", "IDENTIFIER", "STRING"};
+        String name = "";
+        String operator = "";
+        String value = "";
 
         int tokensChecked = 0;
+
 
         int bound = tokenStream.size();
         for (int token = 0; token < bound; token++) {
@@ -41,21 +47,21 @@ public class Parser {
             if (tokenType == "STATEMENT_END") {
                 System.exit(0);
             } else if (token == 1 && tokenType == "IDENTIFIER") {
-                System.out.println("Variable name: " + tokenValue);
+                name = tokenValue;
             } else if (token == 1 && tokenType != "IDENTIFIER") {
                 System.out.println("ERROR: Invalid variable name \"" + tokenValue + "\"");
                 System.exit(0);
             }
             // Gets var assignment operator (=) and also does error validation
             else if (token == 2 && tokenType == "OPERATOR") {
-                System.out.println("Assignment Operator: " + tokenValue);
+                operator = tokenValue;
             } else if (token == 2 && tokenType != "OPERATOR") {
                 System.out.println("ERROR: Invalid operator is missing or invalid");
                 System.exit(0);
             }
             //gets var assigned and does some error validation
             else if (token == 3 && Arrays.asList(tokenTypesList).contains(tokenType)) {
-                System.out.println("Variable Value " + tokenValue);
+                value = tokenValue;
             } else if (token == 3 && !Arrays.asList(tokenTypesList).contains(tokenType)) {
                 System.out.println("ERROR: Invalid variable assignment value \"" + tokenValue + "\"");
                 System.exit(0);
@@ -66,6 +72,8 @@ public class Parser {
             tokenIndex += tokensChecked;
         }
 
+        variableObject varObject = new variableObject();
+        varObject.transpile(name, operator, value);
 
     }
 

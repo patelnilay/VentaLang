@@ -36,7 +36,7 @@ hs_err_pid
 .ideacontentModel.xml
 
 # Python output file
-.py
+*.py
 
 # Sensitive or high-churn files
 .ideadataSources

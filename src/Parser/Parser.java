@@ -1,5 +1,6 @@
 package Parser;
 
+import java.io.FileWriter;
 import java.util.Arrays;
 import java.util.List;
 import Objects.*;
@@ -73,8 +74,17 @@ public class Parser {
         }
 
         variableObject varObject = new variableObject();
-        varObject.transpile(name, operator, value);
+        String execString = varObject.transpile(name, operator, value);
+        transpiledOutputScript(execString);
 
     }
 
+    private void transpiledOutputScript(String execString){
+        try{
+            FileWriter fw=new FileWriter("langOutput/outScript.py");
+            fw.write(execString);
+            fw.close();
+            System.out.println("Success...");
+        }catch(Exception e){System.out.println(e);}
+    }
 }
